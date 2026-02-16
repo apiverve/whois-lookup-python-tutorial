@@ -142,12 +142,20 @@ response = requests.get(
   "status": "ok",
   "error": null,
   "data": {
-    "registrar": "MarkMonitor Inc.",
-    "createdDate": "2007-10-09T18:20:50Z",
-    "expiryDate": "2026-10-09T18:20:50Z",
-    "updatedDate": "2024-09-08T09:08:09Z",
-    "status": ["clientDeleteProhibited", "clientTransferProhibited"],
-    "nameservers": ["dns1.p08.nsone.net", "dns2.p08.nsone.net"]
+    "domainName": "MYSPACE.COM",
+    "registrar": "GoDaddy.com, LLC",
+    "createdDate": "1996-02-22T05:00:00Z",
+    "expiryDate": "2029-02-23T05:00:00Z",
+    "updatedDate": "2023-01-17T00:16:21Z",
+    "domainStatus": [
+      "client delete prohibited",
+      "client transfer prohibited"
+    ],
+    "nameServers": [
+      "ns-cloud-a1.googledomains.com",
+      "ns-cloud-a2.googledomains.com"
+    ],
+    "registrarURL": "http://www.godaddy.com"
   }
 }
 ```
