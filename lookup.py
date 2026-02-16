@@ -49,16 +49,14 @@ def lookup_whois(domain: str) -> dict:
             whois = data['data']
             return {
                 'success': True,
-                'domain': domain,
+                'domain': whois.get('domainName', domain),
                 'registrar': whois.get('registrar'),
                 'createdDate': whois.get('createdDate'),
                 'expiryDate': whois.get('expiryDate'),
                 'updatedDate': whois.get('updatedDate'),
-                'status': whois.get('status'),
-                'nameservers': whois.get('nameservers', []),
-                'registrant': whois.get('registrant'),
-                'admin': whois.get('admin'),
-                'tech': whois.get('tech')
+                'domainStatus': whois.get('domainStatus', []),
+                'nameServers': whois.get('nameServers', []),
+                'registrarURL': whois.get('registrarURL')
             }
         else:
             return {'error': data.get('error', 'WHOIS lookup failed')}
@@ -101,35 +99,28 @@ def print_result(result: dict):
     print(f"  Updated:        {format_date(result.get('updatedDate'))}")
 
     # Status
-    status = result.get('status')
-    if status:
+    domainStatus = result.get('domainStatus', [])
+    if domainStatus:
         print(f"\n  Domain Status")
         print(f"  {'-'*51}")
-        if isinstance(status, list):
-            for s in status[:5]:  # Show first 5 statuses
-                print(f"    {s}")
-        else:
-            print(f"    {status}")
+        for s in domainStatus[:5]:  # Show first 5 statuses
+            # Truncate long status strings
+            if len(s) > 50:
+                s = s[:50] + '...'
+            print(f"    {s}")
 
     # Nameservers
-    nameservers = result.get('nameservers', [])
-    if nameservers:
+    nameServers = result.get('nameServers', [])
+    if nameServers:
         print(f"\n  Nameservers")
         print(f"  {'-'*51}")
-        for ns in nameservers:
+        for ns in nameServers:
             print(f"    {ns}")
 
-    # Contact info (if available)
-    registrant = result.get('registrant')
-    if registrant:
-        print(f"\n  Registrant Contact")
-        print(f"  {'-'*51}")
-        if isinstance(registrant, dict):
-            for key, value in registrant.items():
-                if value:
-                    print(f"    {key.title()}: {value}")
-        else:
-            print(f"    {registrant}")
+    # Registrar URL
+    registrarURL = result.get('registrarURL')
+    if registrarURL:
+        print(f"\n  Registrar URL: {registrarURL}")
 
     print(f"\n{'='*55}\n")
 
