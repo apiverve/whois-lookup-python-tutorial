@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WHOIS Lookup</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>WHOIS Lookup</h1>
+      <p>Who a domain is registered with, how old it is, and when it expires.</p>
+    </header>
+
+    <section class="card">
+      <form id="form">
+        <label>Domain
+          <input id="domain" placeholder="example.com" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+        </label>
+        <div class="chips" id="examples" aria-label="Examples"></div>
+        <button id="go">Look up</button>
+      </form>
+      <div id="result" aria-live="polite"></div>
+    </section>
+
+    <footer>Built with <a href="https://apiverve.com/marketplace/whoislookup">WHOIS Lookup API</a> from APIVerve</footer>
+  </main>
+</body>
+</html>
